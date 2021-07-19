@@ -1,0 +1,37 @@
+
+;<Program title>
+
+jmp start
+
+;data
+;Algorithm
+;Load the address of the first element  of the array in HL pair
+;Move the count to B_reg
+;Increment the pointer 
+;Get the firdt data in A_reg
+;Decrement the counter
+;Increment the pointer
+;Compare the content of the memory  address by HL pair with that of A_reg
+;If carry = 1, go to step 10, if carry =0 go to step 9
+;Move the content of Memory address by HL to A_reg
+;Decrement the count
+;Check for zero of the count.if ZF=0 go to step 6 or if ZF=1 go to the next step
+;Store the smalllest data in memory
+;Terminate the program
+
+;code
+start: nop
+LXI H,2400 ; PC has 8 now here when you execute
+MOV B,M ;PC has 9 now here
+INX H ;PC has 10 now here
+MOV A,M ;PC has 11 now here
+DCR B ;There is an S flag of 1 and p flag of 1
+LOOP: INX H
+CMP M
+JC AHEAD
+MOV A,M
+AHEAD: DCR B
+JNZ LOOP
+STA 2407
+
+HLT

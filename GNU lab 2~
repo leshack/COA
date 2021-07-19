@@ -1,0 +1,40 @@
+
+;<Program title>
+
+jmp start
+
+;data
+;Algorithm
+;Initialize HL pair as memory pointer
+;Get the count at 4200 into C - register
+;Copy it in D - register (for bubble sort (N-1) times required)
+;Get the first value in A - register
+;Compare it with the value at next location
+;If they are out of order, exchange the contents of A - register and Memory
+;Decrement D - register content by 1
+;Repeat steps 5 and 7 till the value in D - register become zero
+;Decrement C - register content by 1
+;Repeat steps 3 to 9 till the value in C - register becomes zero
+
+
+;code
+start: nop
+LXI H,4200
+MOV C,M
+DCR C
+REPEAT: MOV D,C
+LXI H,4201
+LOOP: MOV A,M
+INX H
+CMP M
+JNC SKIP
+MOV B,M
+MOV M,A
+DCX H
+MOV M,B
+INX H
+SKIP: DCR D
+JNZ LOOP
+DCR C
+JNZ REPEAT
+HLT
